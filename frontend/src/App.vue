@@ -1,10 +1,23 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div id="nav">
+    <nav class="container-fluid navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Logo Here</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto">
+          <router-link to="/login" class="nav-link">Login</router-link>
+          <router-link to="/register" class="nav-link">Register</router-link>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <router-view/>
 </template>
+
 
 <style>
 #app {
@@ -15,16 +28,18 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
+#nav {
+  text-align: center;
 }
 
-nav a {
+#nav a {
   font-weight: bold;
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+#nav a.router-link-exact-active {
+  color: whitesmoke;
+  background: crimson;
+  border-radius: .5rem;
 }
 </style>

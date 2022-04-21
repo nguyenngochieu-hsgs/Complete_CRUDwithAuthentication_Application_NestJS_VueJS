@@ -7,10 +7,10 @@ export class UserEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({nullable: false})
     username: string;
 
-    @Column()
+    @Column({nullable: false})
     password: string
 
     @OneToMany(() => TaskEntity, task => task.user)
