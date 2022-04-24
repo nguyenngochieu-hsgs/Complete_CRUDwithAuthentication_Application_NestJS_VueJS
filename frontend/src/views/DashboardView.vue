@@ -1,13 +1,21 @@
-<template>
+<template> 
+  <div> 
+    <Dashboard/> 
+  </div> 
+</template> 
+<script> 
+import Dashboard from "@/components/Dashboard"; 
+export default { 
+  name: "DashboardView", 
+  components: { 
+    Dashboard 
+  },   
 
-</template>
+  created() { 
+    this.$emit("message", true); 
+  }, 
+} 
+</script> 
 
-<script>
-export default {
-  name: "DashboardView"
-}
-</script>
-
-<style scoped>
-
-</style>
+<style scoped> 
+</style> 

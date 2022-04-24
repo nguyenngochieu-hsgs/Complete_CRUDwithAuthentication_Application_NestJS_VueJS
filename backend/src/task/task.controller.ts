@@ -16,7 +16,7 @@ export class TaskController {
         if (newTask){
             return res.status(HttpStatus.CREATED).json({
                 message: 'Task is created',
-                successs: true
+                success: true
             })
         }
         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
@@ -34,7 +34,7 @@ export class TaskController {
             return res.status(HttpStatus.CREATED).json({
                 message: 'Task is created',
                 tasks: tasks,
-                successs: true
+                success: true
             })
         }
         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({

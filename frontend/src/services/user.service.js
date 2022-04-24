@@ -1,12 +1,13 @@
 import axios from "axios";
 
 const register = async function(user) {
-    console.log(user);
-    await axios.post("http://localhost:3000/api/user/register", JSON.stringify(user),{
+    console.log("REGISTER : ", user);
+    return await axios.post("http://localhost:3000/api/user/register", JSON.stringify(user), {
         headers: {
             'Content-Type': 'application/json'
         }
     }).then((res) => {
+        console.log("RES :", res);
         return res.data;
     }).catch((error) => {
         return error.response.data;
@@ -21,9 +22,42 @@ const login = async function(user) {
         },
         withCredentials: true
     }).then((res) => {
-        console.log(res.data);
         return res.data;
-    }).catch((error)=>{
+    }).catch((error) => {
+        return error.response.data;
+    })
+}
+
+const getUserProfile = async function() {
+    return await axios.get("http://localhost:3000/api/user/me", {
+        withCredentials: true
+    }).then((res) => {
+        console.log("GetUserProfile : ", res.data);
+        return res.data;
+    }).catch((error) => {
+        return error.response.data;
+    })
+}
+
+const getTasks = async function() {
+    return await axios.get("http://localhost:3000/api/task", {
+        withCredentials: true,
+    }).then((res) => {
+        return res.data;
+    }).catch((error) => {
+        return error.response.data;
+    })
+}
+
+const createTask = async function(task) {
+    return await axios.post("http://localhost:3000/api/task", JSON.stringify(task), {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        withCredentials: true
+    }).then((res) => {
+        return res.data;
+    }).catch((error) => {
         return error.response.data;
     })
 }
@@ -31,4 +65,7 @@ const login = async function(user) {
 export const userService = {
     register,
     login,
+    getUserProfile,
+    getTasks,
+    createTask,
 }
