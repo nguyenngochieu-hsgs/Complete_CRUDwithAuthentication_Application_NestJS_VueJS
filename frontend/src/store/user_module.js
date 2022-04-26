@@ -111,11 +111,18 @@ const actions = {
     async updateTask({ commit }, update_task_info) {
         const task_id = update_task_info[0]
         const task_view_idx = update_task_info[1]
-        const update_task = {
+        let update_task = {
             id: task_id,
-            title: update_task_info[2],
-            description: update_task_info[3],
+        };
+        if (update_task_info[2] !== "") {
+            update_task["title"] = update_task_info[2]
         }
+
+        if (update_task_info[3] !== "") {
+            update_task["description"] = update_task_info[3]
+        }
+
+        console.log("update_task : ", update_task)
         const res = await userService.updateTask(task_id, update_task);
         console.log("TASK ID : ", task_id);
         if (res.success) {

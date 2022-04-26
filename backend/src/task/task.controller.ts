@@ -61,6 +61,7 @@ export class TaskController {
     @UseGuards(JwtAuthGuard)
     @Put(':id')
     async updateOne(@Body() updateTaskDto: UpdateTaskDto, @Param('id') taskId: string, @Res() res: Response, @Req() req) {
+        console.log(updateTaskDto);
         const task = await this.taskService.updateTask(req.user.id, parseInt(taskId), updateTaskDto);
         if (task) {
             return res.status(HttpStatus.OK).json({

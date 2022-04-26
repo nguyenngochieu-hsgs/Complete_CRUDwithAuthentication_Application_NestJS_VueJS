@@ -36,8 +36,12 @@ export class TaskService {
     }
 
    async updateTask(userId: string, taskId: number, updateTaskDto: UpdateTaskDto) {
-       await this.taskRepository.update({id: taskId}, updateTaskDto);
-       const updateTask = await this.taskRepository.findOne({ where: {id: taskId, user: userId}});
+    //    await this.taskRepository.update({id: taskId}, updateTaskDto);
+       let updateTask = await this.taskRepository.findOne({ where: {id: taskId, user: userId}});
+       updateTask = await this.taskRepository.save({
+           ...updateTask,
+           ...updateTaskDto,
+       })
        if (!updateTask) {
            return null;
        }

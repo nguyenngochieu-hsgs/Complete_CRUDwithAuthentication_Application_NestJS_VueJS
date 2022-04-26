@@ -32,11 +32,11 @@
           <td>{{ task.title }}</td> 
           <td>{{ task.description }}</td> 
           <td> 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" @click="openUpdateModal(task.id, task_view_idx)"> 
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" @click="openUpdateModal(task.id, task_view_idx, task.title, task.description)"> 
               Update {{task.id}}
             </button> 
             <!-- Modal --> 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" :data="updateData"> 
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" :data="modalData"> 
               <div class="modal-dialog" role="document"> 
                 <div class="modal-content"> 
                   <div class="modal-header"> 
@@ -52,7 +52,7 @@
                         id="update_task_title" 
                         class="form-control" 
                         v-model="update_task_title" 
-                        placeholder="Update task title" 
+                        :placeholder=modalData.current_task_title
                       /> 
                       <label class="form-label" for="update_task_title"></label> 
                       <input 
@@ -60,14 +60,14 @@
                         id="update_task_description" 
                         class="form-control" 
                         v-model="update_task_description" 
-                        placeholder="Update task description" 
+                        :placeholder=modalData.current_task_description
                       /> 
                       <label class="form-label" for="update_task_description"></label> 
                     </div> 
                     <div class="modal-footer"> 
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
-                      <h3>{{updateData.task_id}}</h3>
-                      <button type="submit" class="btn btn-primary" data-dismiss="modal" @click="updateTask($event, updateData.task_id, updateData.task_view_id)">Save changes</button> 
+                      <h3>{{modalData.task_id}}</h3>
+                      <button type="submit" class="btn btn-primary" data-dismiss="modal" @click="updateTask($event, modalData.task_id, modalData.task_view_id)">Save changes</button> 
                     </div> 
                   </form> 
                 </div>
@@ -92,7 +92,7 @@ export default {
       new_task_title: "", 
       update_task_title: "",
       update_task_description: "",
-      updateData: {},
+      modalData: {},
     }; 
   }, 
 
@@ -129,11 +129,15 @@ export default {
       this.tasks = this._tasks; 
     }, 
 
-    openUpdateModal(task_id, task_view_id) {
-      this.updateData = {
+    openUpdateModal(task_id, task_view_id, task_title, task_description) {
+      this.modalData = {
         task_id : task_id,
-        task_view_id: task_view_id
-      }
+        task_view_id: task_view_id,
+        current_task_title: task_title,
+        current_task_description: task_description
+      };
+      this.update_task_title = task_title;
+      this.update_task_description = task_description;
     },
 
     async updateTask(e, taskId, task_view_idx) { 
