@@ -16,6 +16,7 @@ export class TaskController {
         if (newTask){
             return res.status(HttpStatus.CREATED).json({
                 message: 'Task is created',
+                task: newTask,
                 success: true
             })
         }

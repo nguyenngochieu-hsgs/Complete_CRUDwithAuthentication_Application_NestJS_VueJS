@@ -56,11 +56,38 @@ const createTask = async function(task) {
         },
         withCredentials: true
     }).then((res) => {
+        console.log(res.data);
         return res.data;
     }).catch((error) => {
         return error.response.data;
     })
 }
+
+const updateTask = async function(task_id, update_task) {
+    return await axios.put("http://localhost:3000/api/task/" + task_id, JSON.stringify(update_task), {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        withCredentials: true
+    }).then((res) => {
+        return res.data;
+    }).catch((error) => {
+        return error.response.data;
+    })
+}
+
+const deleteTask = async function(task_id) {
+    return await axios.delete("http://localhost:3000/api/task/" + task_id, {
+        withCredentials: true
+    }).then((res) => {
+        return res.data;
+    }).catch((error) => {
+        return error.response.data;
+    })
+
+}
+
+
 
 export const userService = {
     register,
@@ -68,4 +95,6 @@ export const userService = {
     getUserProfile,
     getTasks,
     createTask,
+    updateTask,
+    deleteTask,
 }

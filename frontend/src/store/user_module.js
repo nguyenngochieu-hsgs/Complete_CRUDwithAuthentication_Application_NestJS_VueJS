@@ -1,4 +1,4 @@
-import {userService} from "@/services/user.service";
+import { userService } from "@/services/user.service";
 
 const state = () => ({
     registered: {
@@ -37,23 +37,22 @@ const getters = {
 };
 
 const actions = {
-    registerReset({ commit }){
+    registerReset({ commit }) {
         commit('registerReset');
     },
 
-    async register({ commit }, user){
+    async register({ commit }, user) {
         const res = await userService.register(user);
         if (res.success) {
             commit('registerSuccess');
-        }
-        else {
+        } else {
             commit('registerFailure');
         }
     },
 
-    async login({commit}, user){
+    async login({ commit }, user) {
         const res = await userService.login(user);
-        console.log("RES : ",res);
+        console.log("RES : ", res);
         if (res.success) {
 
             const userProfile = await userService.getUserProfile();
@@ -64,41 +63,65 @@ const actions = {
                 commit('loginSuccess', userProfile);
                 console.log("Login SUCCESSFULLY");
                 return true;
-            }
-            else{
+            } else {
                 commit('loginFailure');
                 return false;
             }
-        }
-        else {
+        } else {
             commit('loginFailure');
             console.log("Login UNSUCESSFULLY");
             return false;
         }
     },
 
-    async getTasks({commit}) {
+    async getTasks({ commit }) {
         const res = await userService.getTasks();
         console.log("RES: ", res);
         if (res.success) {
             commit('getTaskSuccess', res.tasks);
             return res.tasks;
-        }
-        else {
+        } else {
             commit('getTaskFailure');
             console.log("Get Task Failed");
             return null;
         }
     },
 
-    async createTask({commit}, task) {
+    async createTask({ commit }, task) {
         const res = await userService.createTask(task);
         console.log("create task res : ", res);
         if (res.success) {
-            commit('createTaskSuccess', task);
+            commit('createTaskSuccess', res.task);
             return true;
+        } else {
+            return false;
         }
-        else{
+    },
+
+    async deleteTask({ commit }, task_ids) {
+        const res = await userService.deleteTask(task_ids[0]);
+        if (res.success) {
+            commit('deleteTaskSuccess', task_ids[1]);
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    async updateTask({ commit }, update_task_info) {
+        const task_id = update_task_info[0]
+        const task_view_idx = update_task_info[1]
+        const update_task = {
+            id: task_id,
+            title: update_task_info[2],
+            description: update_task_info[3],
+        }
+        const res = await userService.updateTask(task_id, update_task);
+        console.log("TASK ID : ", task_id);
+        if (res.success) {
+            commit('updateTaskSuccess', [task_view_idx, update_task]);
+            return true;
+        } else {
             return false;
         }
     }
@@ -142,8 +165,18 @@ const mutations = {
     },
 
     createTaskSuccess(state, task) {
-        console.log("TASK : ",task)
+        console.log("TASK : ", task)
         state.tasks.push(task);
+    },
+
+    deleteTaskSuccess(state, task_view_idx) {
+        state.tasks.splice(task_view_idx, 1);
+    },
+
+    updateTaskSuccess(state, update_info) {
+        const task_view_idx = update_info[0]
+        const update_task = update_info[1]
+        state.tasks[task_view_idx] = update_task;
     }
 };
 
