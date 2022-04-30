@@ -47,7 +47,7 @@ export class TaskController {
     @UseGuards(JwtAuthGuard)
     @Get(':id')
     async getOne(@Param('id') taskId: string, @Res() res: Response, @Req() req) {
-        const task = await this.taskService.getTaskById(req.user.id, parseInt(taskId));
+        const task = await this.taskService.getTaskById(req.user.id, taskId);
         if (task){
             return res.status(HttpStatus.OK).json({
                 message: 'Get task successfully',
@@ -62,7 +62,7 @@ export class TaskController {
     @Put(':id')
     async updateOne(@Body() updateTaskDto: UpdateTaskDto, @Param('id') taskId: string, @Res() res: Response, @Req() req) {
         console.log(updateTaskDto);
-        const task = await this.taskService.updateTask(req.user.id, parseInt(taskId), updateTaskDto);
+        const task = await this.taskService.updateTask(req.user.id, taskId, updateTaskDto);
         if (task) {
             return res.status(HttpStatus.OK).json({
                 message: 'Delete task successfully',
@@ -76,7 +76,7 @@ export class TaskController {
     @UseGuards(JwtAuthGuard)
     @Delete(':id')
     async deleteOne(@Param('id') taskId: string, @Res() res: Response, @Req() req) {
-        const task = await this.taskService.deleteTask(req.user.id, parseInt(taskId));
+        const task = await this.taskService.deleteTask(req.user.id, taskId);
         if (task) {
             return res.status(HttpStatus.OK).json({
                 message: 'Delete task successfully',

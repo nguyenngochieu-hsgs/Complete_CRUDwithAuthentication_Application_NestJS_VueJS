@@ -19,8 +19,10 @@ export class UserService {
                 return user;
             }
         }
-
-        return null;
+        else{
+            throw new HttpException('User not existed ', HttpStatus.BAD_REQUEST);
+        }
+        
     }
 
     //For CRUD

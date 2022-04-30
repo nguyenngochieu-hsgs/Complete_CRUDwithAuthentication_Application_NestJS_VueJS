@@ -1,8 +1,8 @@
 <template>
   <div class="home container">
     <h1>Dashboard</h1>
-    <p>{{ userProfile.username }}</p>
-    <p>{{ userProfile.id }}</p>
+    <!-- <p>{{ userProfile.username }}</p> -->
+    <!-- <p>{{ userProfile.id }}</p> -->
     <form>
       <input
         type="text"
@@ -33,7 +33,7 @@
           <td>{{ task.description }}</td> 
           <td> 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" @click="openUpdateModal(task.id, task_view_idx, task.title, task.description)"> 
-              Update {{task.id}}
+              Update
             </button> 
             <!-- Modal --> 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" :data="modalData"> 
@@ -66,7 +66,6 @@
                     </div> 
                     <div class="modal-footer"> 
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
-                      <h3>{{modalData.task_id}}</h3>
                       <button type="submit" class="btn btn-primary" data-dismiss="modal" @click="updateTask($event, modalData.task_id, modalData.task_view_id)">Save changes</button> 
                     </div> 
                   </form> 

@@ -25,9 +25,14 @@
               </div>
 
               <div class="d-grid mb-2">
-                <router-link to="/login" @click="onSubmit" class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Register</router-link>
+                <button @click="onSubmit" class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Register</button>
               </div>
-
+              
+              <div v-if="registerErrorMessages.length != 0" class="alert alert-danger" role="alert">
+                <ul v-for="errorMsg in registerErrorMessages">
+                  <li >{{errorMsg}}</li>
+                </ul>
+              </div>
               <router-link class="nav-link d-block text-center mt-2 small" to="/login">Have an account? Sign In</router-link>
             </form>
           </div>
@@ -46,7 +51,8 @@ export default {
     return {
       username: '',
       password: '',
-      confirm_password: ''
+      confirm_password: '',
+      registerErrorMessages: [],
     }
   },
 
@@ -61,17 +67,36 @@ export default {
       }
     ),
 
-    onSubmit(e){
+    async onSubmit(e){
       e.preventDefault();
-      console.log("Register");
-      console.log(this.username);
-      console.log(this.password);
-      console.log(this.confirm_password);
+      this.registerErrorMessages = [];
+      let isPassFrontendValidate = true;
       const user = {
         username: this.username,
         password: this.password,
       };
-      this.register(user);
+
+      //Simple Frontend validate when registering
+      if (user.username.length <= 3 || user.password.length <=3){
+        this.registerErrorMessages.push("Username or Password's length must be greater than 3");
+        isPassFrontendValidate = false;
+      }
+
+      if (user.password != this.confirm_password) {
+        this.registerErrorMessages.push("Confirm password not match to your password");
+        isPassFrontendValidate = false;
+      }
+
+      if (isPassFrontendValidate) {
+        const registerResult = await this.register(user);
+        if (registerResult.success) {
+          console.info(registerResult.message);
+          this.$router.push('/login');
+        }
+        else{
+          this.registerErrorMessages.push(registerResult.message);
+        }
+      }
     }
   }
 }

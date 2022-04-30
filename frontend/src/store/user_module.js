@@ -45,8 +45,10 @@ const actions = {
         const res = await userService.register(user);
         if (res.success) {
             commit('registerSuccess');
+            return res;
         } else {
             commit('registerFailure');
+            return res;
         }
     },
 
@@ -62,15 +64,14 @@ const actions = {
                 localStorage.setItem("userProfile", JSON.stringify(userProfile));
                 commit('loginSuccess', userProfile);
                 console.log("Login SUCCESSFULLY");
-                return true;
+                return res;
             } else {
                 commit('loginFailure');
                 return false;
             }
         } else {
             commit('loginFailure');
-            console.log("Login UNSUCESSFULLY");
-            return false;
+            return res;
         }
     },
 

@@ -40,6 +40,11 @@
                   Login
                 </button>
               </div>
+              <div v-if="loginErrorMessages.length != 0" class="alert alert-danger" role="alert">
+                <ul v-for="errorMsg in loginErrorMessages">
+                  <li >{{errorMsg}}</li>
+                </ul>
+              </div>
             </form>
           </div>
         </div>
@@ -60,6 +65,7 @@ export default {
     return {
       username: "",
       password: "",
+      loginErrorMessages: [],
     };
   },
 
@@ -70,14 +76,19 @@ export default {
 
     async onSubmit(e) {
       e.preventDefault();
+      this.loginErrorMessages = [];
       const user = {
         username: this.username,
         password: this.password,
       };
       const login_result = await this.login(user);
       console.log("Login Result : ", login_result);
-      if (login_result) {
+      if (login_result.success) {
         this.$router.push("/dashboard");
+      }
+      else {
+        console.log(login_result);
+        this.loginErrorMessages.push(login_result.message);
       }
     },
   },

@@ -10,6 +10,7 @@ const register = async function(user) {
         console.log("RES :", res);
         return res.data;
     }).catch((error) => {
+        console.log(error.response.data);
         return error.response.data;
     })
 }

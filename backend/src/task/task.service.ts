@@ -15,7 +15,7 @@ export class TaskService {
         return tasks;
     }
 
-    async getTaskById(userId: string, taskId: number) {
+    async getTaskById(userId: string, taskId: string) {
         const task = await this.taskRepository.findOne({ where: {id: taskId, user: userId }});
         if (task) {
             return task;
@@ -35,7 +35,7 @@ export class TaskService {
         return newTask;
     }
 
-   async updateTask(userId: string, taskId: number, updateTaskDto: UpdateTaskDto) {
+   async updateTask(userId: string, taskId: string, updateTaskDto: UpdateTaskDto) {
     //    await this.taskRepository.update({id: taskId}, updateTaskDto);
        let updateTask = await this.taskRepository.findOne({ where: {id: taskId, user: userId}});
        updateTask = await this.taskRepository.save({
@@ -48,7 +48,7 @@ export class TaskService {
        return updateTask;
    }
     
-    async deleteTask(userId: string, taskId: number) {
+    async deleteTask(userId: string, taskId: string) {
         const task = await this.taskRepository.findOne({ where: {id: taskId, user: userId}});
         if (!task) {
             return null;
