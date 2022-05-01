@@ -8,3 +8,12 @@
 #### 1. Login
 ![Login view](https://github.com/nguyenngochieu-hsgs/Complete_CRUDwithAuthentication_Application_NestJS_VueJS/blob/main/images/LoginView.PNG)
 
+#### 2. Register
+![Register view](https://github.com/nguyenngochieu-hsgs/Complete_CRUDwithAuthentication_Application_NestJS_VueJS/blob/main/images/RegisterView.PNG)
+
+#### 3. Dashboard
+![Dashboard view](https://github.com/nguyenngochieu-hsgs/Complete_CRUDwithAuthentication_Application_NestJS_VueJS/blob/main/images/DashboardView.PNG)
+
+#### 4. Update
+![Update view](https://github.com/nguyenngochieu-hsgs/Complete_CRUDwithAuthentication_Application_NestJS_VueJS/blob/main/images/UpdateView.PNG)
+
