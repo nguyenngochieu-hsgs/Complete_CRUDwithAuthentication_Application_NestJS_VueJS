@@ -9,7 +9,7 @@
 
 ### I. This repository is for building a simple web application which involves basic CRUD options of task management. Moreover, the app allows users to register and login their dashboard based on jwt cookie authentication:
 * Backend: NestJS
-* Frontend: VueJS
+* Frontend: VueJS (main branch) / Angular (other branch)
 * Database: PostgreSQL
 
 ### II. Some demo images
