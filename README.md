@@ -17,3 +17,8 @@
 #### 4. Update
 ![Update view](https://github.com/nguyenngochieu-hsgs/Complete_CRUDwithAuthentication_Application_NestJS_VueJS/blob/main/images/UpdateView.PNG)
 
+### III. Todos
+- [ ] Add validation pipe at backend (login & register).
+- [ ] Add some complex validation policies at frontend (login & register).
+- [ ] Add option to upload, change and delete profile image
+- [ ] Beautify website.
