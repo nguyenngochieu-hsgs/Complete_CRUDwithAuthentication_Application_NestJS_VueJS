@@ -1,4 +1,12 @@
 # Complete_CRUDwithAuthentication_Application_NestJS_VueJS
+
+## Todos
+- [ ] Add validation pipe at backend (login & register).
+- [ ] Add some complex validation policies at frontend (login & register).
+- [ ] Add option to upload, change and delete profile image
+- [ ] Beautify website.
+
+
 ### I. This repository is for building a simple web application which involves basic CRUD options of task management. Moreover, the app allows users to register and login their dashboard based on jwt cookie authentication:
 * Backend: NestJS
 * Frontend: VueJS
@@ -17,8 +25,3 @@
 #### 4. Update
 ![Update view](https://github.com/nguyenngochieu-hsgs/Complete_CRUDwithAuthentication_Application_NestJS_VueJS/blob/main/images/UpdateView.PNG)
 
-### III. Todos
-- [ ] Add validation pipe at backend (login & register).
-- [ ] Add some complex validation policies at frontend (login & register).
-- [ ] Add option to upload, change and delete profile image
-- [ ] Beautify website.
