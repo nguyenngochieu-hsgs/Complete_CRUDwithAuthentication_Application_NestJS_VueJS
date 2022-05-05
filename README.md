@@ -12,7 +12,7 @@
 * Frontend: VueJS (main branch) / Angular (other branch)
 * Database: PostgreSQL
 
-### II. Some demo images
+### II. Some demo images (VueJS)
 #### 1. Login
 ![Login view](https://github.com/nguyenngochieu-hsgs/Complete_CRUDwithAuthentication_Application_NestJS_VueJS/blob/main/images/LoginView.PNG)
 
